@@ -138,7 +138,7 @@ static void gui_scheduler(Event event, void *d)
 }
 
 void gui_start(void) {
-  UI *ui = xcalloc(1, sizeof(UI));  // Freed by ui_bridge_stop().
+  UI *ui = xcalloc(1, sizeof(UI));  // Not freed by ui_bridge_stop() (yet? TODO(smolck))
   ui->stop = stop;
   ui->grid_resize = grid_resize;
   ui->grid_clear = grid_clear;
