@@ -1,13 +1,20 @@
-#define INCLUDE_GENERATED_DECLARATIONS
+#include "libnvim.h"
 
 #include "nvim/memory.h"
-#include "ex_cmds_enum.generated.h"
 #include "nvim/api/private/defs.h"
 
 #include "nvim/main.h"
 
-
-/*int stuff(int argc, char **argv)
+int start_nvim(void (*f)())
 {
-  return main(argc, argv);
+  char** stuff = malloc(1 * sizeof(char *));
+  stuff[0] = "nvim";
+  // stuff[1] = "--headless";
+
+  return nvim_main(1, stuff, f);
+}
+
+/*UI *gui_start(GUIData *gui_data)
+{
+
 }*/
