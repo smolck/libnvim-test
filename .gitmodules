@@ -6,4 +6,5 @@
 	url = https://chromium.googlesource.com/chromium/tools/depot_tools.git
 [submodule "third_party/neovim"]
 	path = third_party/neovim
-	url = https://github.com/neovim/neovim
+	url = https://github.com/smolck/neovim
+	branch = libnvim
