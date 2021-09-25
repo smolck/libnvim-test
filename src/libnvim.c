@@ -7,8 +7,10 @@
 
 int start_nvim(void (*f)())
 {
-  char** stuff = malloc(1 * sizeof(char *));
+  char** stuff = malloc(3 * sizeof(char *));
   stuff[0] = "nvim";
+  stuff[1] = "-u";
+  stuff[2] = "NONE";
   // stuff[1] = "--headless";
 
   return nvim_main(1, stuff, f);

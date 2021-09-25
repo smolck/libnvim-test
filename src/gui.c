@@ -102,15 +102,16 @@ static void raw_line(UI *ui, Integer g, Integer linerow, Integer startcol, Integ
                          const sattr_T *attrs)
 
 {
-  printf("raw line: %s\n", (char *)chunk);
+  // printf("raw line: %s\n", (char *)chunk);
   for (Integer c = startcol; c < endcol; c++) {
-    const char* stuff;
-    memcpy((void *)stuff, chunk[c-startcol], sizeof(schar_T));
-    printf("%s\n", stuff);
+    // const char* stuff;
+    // memcpy((void *)stuff, chunk[c-startcol], sizeof(schar_T));
+    printf("%s", (char *)chunk[c-startcol]);
 
     // assert((size_t)attrs[c-startcol] < kv_size(data->attrs));
     // grid->cells[linerow][c].attr = attrs[c-startcol];
   }
+  printf("\n");
 }
 
 
