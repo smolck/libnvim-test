@@ -9,7 +9,7 @@ static void stop(UI* ui)
 
 static void grid_resize(UI *ui, Integer g, Integer width, Integer height)
 {
-
+  printf("grid: %lld, width: %lld, height: %lld, ", g, width, height);
 }
 
 static void grid_clear(UI *ui, Integer g)
@@ -166,6 +166,9 @@ void gui_start(void) {
   memset(ui->ui_ext, 0, sizeof(ui->ui_ext));
   ui->ui_ext[kUILinegrid] = true;
   ui->ui_ext[kUITermColors] = true;
+
+  ui->width = 80;
+  ui->height = 80;
 
   ui_bridge_attach(ui, gui_main, gui_scheduler);
 }

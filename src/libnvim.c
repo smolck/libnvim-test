@@ -13,7 +13,7 @@ int start_nvim(void (*f)())
   stuff[2] = "NONE";
   // stuff[1] = "--headless";
 
-  return nvim_main(1, stuff, f);
+  return nvim_main(3, stuff, f);
 }
 
 /*UI *gui_start(GUIData *gui_data)
