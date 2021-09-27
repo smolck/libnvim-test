@@ -18,7 +18,11 @@ set_property(TARGET libskia PROPERTY
              IMPORTED_LOCATION
              "${SKIA_DIR}/out/Static/libskia.a")
 
-add_executable(meovvim src/main.c src/libnvim.c src/gui.c)
+add_executable(meovvim
+  src/main.c
+  src/renderer.cpp
+  src/renderer-interface.cpp
+)
 
 find_library(corefoundation_lib CoreFoundation)
 find_library(cfnetwork_lib CFNetwork)
