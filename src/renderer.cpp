@@ -5,6 +5,12 @@
 #include "include/core/SkData.h"
 #include "include/core/SkStream.h"
 
+// For stuff relating to Skia, some refs:
+// https://github.com/LWJGL/lwjgl3-demos/blob/main/src/org/lwjgl/demo/opengl/glfw/Multithreaded.java
+// https://gist.github.com/ad8e/dd150b775ae6aa4d5cf1a092e4713add#file-glfw_ship-cpp-L44
+// https://github.com/sonicdebris/skia-on-glfw
+// https://github.com/acmlira/mimicry
+
 constexpr int INITIAL_WIDTH = 900;
 constexpr int INITIAL_HEIGHT = 900;
 
