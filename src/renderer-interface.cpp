@@ -2,16 +2,16 @@
 #include "renderer.hpp"
 
 extern "C" {
-  RendererHandle create_Renderer(int stuff) {
-    return new Renderer(stuff);
+  RendererHandle create_Renderer(void) {
+    return new Renderer();
+  }
+
+  void renderer_glfwLoop(RendererHandle r) {
+    static_cast<Renderer*>(r)->glfwLoop();
   }
 
   void renderer_stop(RendererHandle r) {
     static_cast<Renderer*>(r)->stop();
-  }
-
-  void renderer_print_whatever(RendererHandle r) {
-    static_cast<Renderer*>(r)->printWhatever();
   }
 
   void renderer_free(RendererHandle r) {

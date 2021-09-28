@@ -8,3 +8,6 @@
 	path = third_party/neovim
 	url = https://github.com/smolck/neovim
 	branch = libnvim
+[submodule "third_party/glfw"]
+	path = third_party/glfw
+	url = https://github.com/glfw/glfw

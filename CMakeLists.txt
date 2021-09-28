@@ -11,6 +11,9 @@ set(NVIM_DIR "${CMAKE_CURRENT_LIST_DIR}/third_party/neovim")
 set(SKIA_DIR "${CMAKE_CURRENT_LIST_DIR}/third_party/skia")
 
 include(cmake/IHateCmake.cmake)
+include(FindPNG)
+
+add_subdirectory("${PROJECT_SOURCE_DIR}/third_party/glfw/")
 
 # skia
 add_library(libskia STATIC IMPORTED)
@@ -19,21 +22,27 @@ set_property(TARGET libskia PROPERTY
              "${SKIA_DIR}/out/Static/libskia.a")
 
 add_executable(meovvim
-  src/main.c
+  src/main.cpp
+  src/ui.c
   src/renderer.cpp
   src/renderer-interface.cpp
 )
+
+find_package(ZLIB REQUIRED)
 
 find_library(corefoundation_lib CoreFoundation)
 find_library(cfnetwork_lib CFNetwork)
 
 target_link_libraries(meovvim PRIVATE 
+  glfw
+  ${GLFW_LIBRARIES}
   ${NVIM_LINK_LIBRARIES}
   libnvim
   libskia
+  ${ZLIB_LIBRARY}
   ${corefoundation_lib}
   ${cfnetwork_lib}
-  )
+)
 
 target_include_directories(meovvim
   PUBLIC 
@@ -41,6 +50,8 @@ target_include_directories(meovvim
   "${NVIM_DIR}/build/include"
   "${NVIM_DIR}/build/src/nvim/auto"
   "${NVIM_DIR}/src"
-  "${PROJECT_SOURCE_DIR}/third_party/skia/"
-  "${PROJECT_SOURCE_DIR}/third_party/neovim/config/"
-  "${PROJECT_SOURCE_DIR}/src")
+  "${NVIM_DIR}/config"
+  "${SKIA_DIR}"
+  "${PROJECT_SOURCE_DIR}/third_party/glfw/include"
+  "${PROJECT_SOURCE_DIR}/src"
+)

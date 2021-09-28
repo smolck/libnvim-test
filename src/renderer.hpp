@@ -1,4 +1,11 @@
 #pragma once
+#include "GLFW/glfw3.h"
+#define SK_GL
+
+#include "include/gpu/GrDirectContext.h"
+#include "include/core/SkSurface.h"
+
+#include <thread>
 
 /// struct to store values from 'guicursor' and 'mouseshape'
 /// Indexes in shape_table[]
@@ -23,13 +30,24 @@ SHAPE_IDX_SM     = 16,      ///< showing matching paren
 SHAPE_IDX_COUNT  = 17
 } ModeShape;*/
 
+struct GLFWDestructor {
+    void operator()(GLFWwindow* ptr) {
+         glfwDestroyWindow(ptr);
+    }
+};
+
 class Renderer {
   private:
-    int m_stuff;
-  public:
-    Renderer(int whatever) : m_stuff(whatever) {};
+    std::unique_ptr<SkSurface> m_surface;
+    std::unique_ptr<GLFWwindow, GLFWDestructor> m_window;
+    std::unique_ptr<GrDirectContext> m_context;
 
-    void printWhatever();
+    void initGlfwAndSkia();
+  public:
+    Renderer();
+
+    void glfwLoop();
+
     void stop();
 
     void gridResize(int gridId, int width, int height);

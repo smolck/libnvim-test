@@ -1,5 +1,5 @@
-/*#define INCLUDE_GENERATED_DECLARATIONS
-#include "renderer-interface.h"
+#define INCLUDE_GENERATED_DECLARATIONS
+#include "ui.h"
 
 #include "ui_to_renderer.h"
 #include "nvim/memory.h"
@@ -10,8 +10,9 @@
 
 int nvim_main(int argc, char **argv, void (*f)());
 
+static RendererHandle renderer;
+
 void gui_start(void) {
-  RendererHandle * renderer = create_Renderer();
   // renderer_print_whatever(renderer);
   // renderer_free(renderer);
   UI *ui = xcalloc(1, sizeof(UI));  // Not freed by ui_bridge_stop() (yet? TODO(smolck))
@@ -49,16 +50,17 @@ void gui_start(void) {
   ui->height = 80;
 
   ui_bridge_attach(ui, gui_main, gui_scheduler);
-  renderer_glfwLoop(ui->data);
 }
 
-int main(int argc, char **argv)
+int runNvim(RendererHandle r)
 {
   char** stuff = malloc(3 * sizeof(char *));
   stuff[0] = "nvim";
   stuff[1] = "-u";
   stuff[2] = "NONE";
   // stuff[1] = "--headless";
+  
+  renderer = r;
 
   return nvim_main(3, stuff, &gui_start);
-}*/
+}
