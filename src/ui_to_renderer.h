@@ -102,12 +102,7 @@ static void raw_line(UI *ui, Integer g, Integer linerow, Integer startcol,
                    flags, (const char *)chunk, attrs);
 }
 
-/// Main function of the GUI thread
 static void gui_main(UIBridgeData *bridge, UI *ui) { CONTINUE(bridge); }
-
-// TODO(smolck): This is not actually true rn I don't think, just leaving it as
-// as a reminder; currently we don't do any threading in meovvim itself afaik.
-/// Handoff point between the main (ui_bridge) thread and the GUI thread.
 static void gui_scheduler(Event event, void *d) {
   event.handler(event.argv);
 
