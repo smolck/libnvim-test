@@ -5,9 +5,7 @@ extern "C" {
 #endif
 
 typedef void *RendererHandle;
-RendererHandle create_Renderer(void);
 void renderer_glfwLoop(RendererHandle r);
-void renderer_free(RendererHandle r);
 void renderer_stop(RendererHandle r);
 void renderer_gridResize(RendererHandle r, int gridId, int width, int height);
 void renderer_gridClear(RendererHandle r, int gridId);

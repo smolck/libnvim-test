@@ -2,15 +2,11 @@
 #include "renderer.hpp"
 
 extern "C" {
-RendererHandle create_Renderer(void) { return new Renderer(); }
-
 void renderer_glfwLoop(RendererHandle r) {
   static_cast<Renderer *>(r)->glfwLoop();
 }
 
 void renderer_stop(RendererHandle r) { static_cast<Renderer *>(r)->stop(); }
-
-void renderer_free(RendererHandle r) { delete static_cast<Renderer *>(r); }
 
 void renderer_gridResize(RendererHandle r, int gridId, int width, int height) {
   static_cast<Renderer *>(r)->gridResize(gridId, width, height);
