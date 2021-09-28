@@ -2,8 +2,8 @@
 #include "GLFW/glfw3.h"
 #define SK_GL
 
-#include "include/gpu/GrDirectContext.h"
 #include "include/core/SkSurface.h"
+#include "include/gpu/GrDirectContext.h"
 
 #include <thread>
 
@@ -31,64 +31,48 @@ SHAPE_IDX_COUNT  = 17
 } ModeShape;*/
 
 struct GLFWDestructor {
-    void operator()(GLFWwindow* ptr) {
-         glfwDestroyWindow(ptr);
-    }
+  void operator()(GLFWwindow *ptr) { glfwDestroyWindow(ptr); }
 };
 
 class Renderer {
-  private:
-    std::unique_ptr<SkSurface> m_surface;
-    std::unique_ptr<GLFWwindow, GLFWDestructor> m_window;
-    std::unique_ptr<GrDirectContext> m_context;
+private:
+  std::unique_ptr<SkSurface> m_surface;
+  std::unique_ptr<GLFWwindow, GLFWDestructor> m_window;
+  std::unique_ptr<GrDirectContext> m_context;
 
-    void initGlfwAndSkia();
-  public:
-    Renderer();
+  void initGlfwAndSkia();
 
-    void glfwLoop();
+public:
+  Renderer();
 
-    void stop();
+  void glfwLoop();
 
-    void gridResize(int gridId, int width, int height);
-    void gridClear(int gridId);
-    void gridCursorGoto(int grid, int row, int col);
-    void gridScroll(
-        int gridId,
-        int startRow,
-        int endRow,
-        int startCol,
-        int endCol, 
-        int rows, 
-        int cols
-    );
-    // void mode_info_set(bool guicursor_enabled, Array args)
-    void updateMenu();
-    void busyStart();
-    void busyStop();
-    void mouseOn();
-    void mouseOff();
-    void setMode(int mode); // See above, TODO(smolck)
-    void modeChange(const char* mode, int modeIdx);
-    // void hlAttrDefine(int id, HlAttrs attrs, HlAttrs cterm_attrs, Array info)
-    void bell();
-    void visualBell();
-    void defaultColorsSet(int rgbFg, int rgbBg, int rgbSp, int ctermFg, int ctermBg);
-    void flush();
-    void suspend();
-    void setTitle(const char* title);
-    void setIcon(const char* icon);
-    void screenshot(const char* path);
-    // void optionSet(const char* name, Object value)
-    void rawLine(
-        int gridId,
-        int lineRow,
-        int startCol,
-        int endCol,
-        int clearCol,
-        int clearAttr,
-        int flags,
-        const char* chunk,
-        const int *attrs
-    );
+  void stop();
+
+  void gridResize(int gridId, int width, int height);
+  void gridClear(int gridId);
+  void gridCursorGoto(int grid, int row, int col);
+  void gridScroll(int gridId, int startRow, int endRow, int startCol,
+                  int endCol, int rows, int cols);
+  // void mode_info_set(bool guicursor_enabled, Array args)
+  void updateMenu();
+  void busyStart();
+  void busyStop();
+  void mouseOn();
+  void mouseOff();
+  void setMode(int mode); // See above, TODO(smolck)
+  void modeChange(const char *mode, int modeIdx);
+  // void hlAttrDefine(int id, HlAttrs attrs, HlAttrs cterm_attrs, Array info)
+  void bell();
+  void visualBell();
+  void defaultColorsSet(int rgbFg, int rgbBg, int rgbSp, int ctermFg,
+                        int ctermBg);
+  void flush();
+  void suspend();
+  void setTitle(const char *title);
+  void setIcon(const char *icon);
+  void screenshot(const char *path);
+  // void optionSet(const char* name, Object value)
+  void rawLine(int gridId, int lineRow, int startCol, int endCol, int clearCol,
+               int clearAttr, int flags, const char *chunk, const int *attrs);
 };

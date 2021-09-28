@@ -1,9 +1,9 @@
 #define INCLUDE_GENERATED_DECLARATIONS
 #include "ui.h"
 
-#include "ui_to_renderer.h"
-#include "nvim/memory.h"
 #include "nvim/api/private/defs.h"
+#include "nvim/memory.h"
+#include "ui_to_renderer.h"
 
 #include "nvim/main.h"
 #include "nvim/ui.h"
@@ -15,7 +15,8 @@ static RendererHandle renderer;
 void gui_start(void) {
   // renderer_print_whatever(renderer);
   // renderer_free(renderer);
-  UI *ui = xcalloc(1, sizeof(UI));  // Not freed by ui_bridge_stop() (yet? TODO(smolck))
+  UI *ui = xcalloc(
+      1, sizeof(UI)); // Not freed by ui_bridge_stop() (yet? TODO(smolck))
   ui->data = renderer;
 
   ui->stop = stop;
@@ -39,7 +40,7 @@ void gui_start(void) {
   ui->set_title = set_title;
   ui->set_icon = set_icon;
   ui->screenshot = screenshot;
-  ui->option_set= option_set;
+  ui->option_set = option_set;
   ui->raw_line = raw_line;
 
   memset(ui->ui_ext, 0, sizeof(ui->ui_ext));
@@ -52,14 +53,13 @@ void gui_start(void) {
   ui_bridge_attach(ui, gui_main, gui_scheduler);
 }
 
-int runNvim(RendererHandle r)
-{
-  char** stuff = malloc(3 * sizeof(char *));
+int runNvim(RendererHandle r) {
+  char **stuff = malloc(3 * sizeof(char *));
   stuff[0] = "nvim";
   stuff[1] = "-u";
   stuff[2] = "NONE";
   // stuff[1] = "--headless";
-  
+
   renderer = r;
 
   return nvim_main(3, stuff, &gui_start);
