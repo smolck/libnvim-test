@@ -3,6 +3,9 @@ all:
 	cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 	cmake --build build
 
+format:
+	clang-format -i --style=LLVM src/*.cpp src/*.c src/*.hpp src/*.h
+
 prepare:
 	# See https://github.com/acmlira/mimicry#preparing-skia
 	cd third_party/neovim && CMAKE_EXTRA_FLAGS="-DFEAT_TUI=OFF" make libnvim
