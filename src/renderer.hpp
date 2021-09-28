@@ -30,6 +30,7 @@ SHAPE_IDX_SM     = 16,      ///< showing matching paren
 SHAPE_IDX_COUNT  = 17
 } ModeShape;*/
 
+// https://stackoverflow.com/a/35794019
 struct GLFWDestructor {
   void operator()(GLFWwindow *ptr) { glfwDestroyWindow(ptr); }
 };
